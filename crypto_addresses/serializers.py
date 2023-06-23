@@ -2,9 +2,6 @@ from rest_framework import serializers
 from .models import Address, Wallet
 
 
-CRYPTO_CHOICES = ["BTC", "ETH"]
-
-
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address

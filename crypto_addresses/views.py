@@ -6,6 +6,8 @@ from .serializers import AddressSerializer, WalletSerializer
 from .wallet_manager import WalletManager
 from .models import Address
 
+CRYPTO_CHOICES = ["BTC", "ETH"]
+
 
 class AddressViewSet(ModelViewSet):
     queryset = Address.objects.all()
@@ -22,12 +24,15 @@ class AddressViewSet(ModelViewSet):
 
     def generate_wallet_data(self, cryptocurrency):
         wallet_manager = WalletManager(cryptocurrency=cryptocurrency)
-        if cryptocurrency == "BTC":
-            data = wallet_manager.create_bitcoin_wallet()
-        elif cryptocurrency == "ETH":
-            data = wallet_manager.create_etherum_wallet()
+        if cryptocurrency in CRYPTO_CHOICES:
+            data = wallet_manager.create_wallet()
         else:
             raise ValueError("Unsupported cryptocurrency")
+        
+        wallet_data = self.parse_data(cryptocurrency, data)
+        return wallet_data
+
+    def parse_data(self, cryptocurrency, data):
         address_data = [{"address": data["addresses"]["p2pkh"]}]
         wallet_data = {"cryptocurrency": cryptocurrency,
                        "xprivate_key": data["xprivate_key"],
@@ -41,5 +46,6 @@ class AddressViewSet(ModelViewSet):
                        "path": data["path"],
                        "hash_data": data["hash"],
                        "addresses": address_data}
+                       
         return wallet_data
 
