@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'dbbackup',  # django-dbbackup
+
     'crypto_addresses',
 ]
 
@@ -114,5 +116,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# DB encryption settings
 CRYPTOGRAPHY_KEY = os.environ.get('CRYPTOGRAPHY_KEY', '')
 CRYPTOGRAPHY_SALT = os.environ.get('CRYPTOGRAPHY_SALT', '')
+
+# DB backup setting
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
