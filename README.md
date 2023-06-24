@@ -24,3 +24,62 @@ To run the app, use the following steps:
     docker run -p 8000:8000 cryptowallet python manage.py runserver 0.0.0.0:8000
 
 2. Open a web browser and visit http://localhost:8000/admin to access the running app admin page with login: admin and pass: admin. For test purpose only dummy admin user was restored from db backup in process of build. In production environment db backups pushed into repos should be strongly avoided!
+
+## API docs
+
+### Create Address
+
+- Method: POST
+- URL: `/api/addresses/`
+- Description: Create a new address for a specific cryptocurrency.
+
+**Request Body**
+
+    {
+    "cryptocurrency": "BTC"
+    }
+
+**Response**
+
+
+    Status: 201 Created
+    Body:
+
+    {
+    "address": "newly_generated_address"
+    }
+
+### Retrieve Addresses
+
+- Method: GET
+- URL: `/api/addresses/`
+- Description: Retrieve a list of all addresses.
+
+**Response**
+
+
+    Status: 200 OK
+    Body:
+    
+    [
+    {
+    "address": "address_string"
+    },
+    ...
+    ]
+
+### Retrieve Address by id
+
+- Method: GET
+- URL: `/api/addresses/<int: id>`
+- Description: Retrieve address
+
+**Response**
+
+
+    Status: 200 OK
+    Body:
+
+    {
+    "address": "address_string"
+    }
