@@ -27,7 +27,7 @@ class AddressViewSet(ModelViewSet):
         if cryptocurrency in CRYPTO_CHOICES:
             data = wallet_manager.create_wallet()
         else:
-            raise ValueError("Unsupported cryptocurrency")
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         
         wallet_data = self.parse_data(cryptocurrency, data)
         return wallet_data

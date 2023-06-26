@@ -21,7 +21,7 @@ class WalletManager:
         ENTROPY: str = generate_entropy(strength=STRENGTH)
 
         # Secret passphrase for mnemonic
-        PASSPHRASE: Optional[str] = None  # "meherett"
+        PASSPHRASE: Optional[str] = "None"
 
         # Initialize Bitcoin mainnet HDWallet
         hdwallet: HDWallet = HDWallet(symbol=self.cryptocurrency, use_default_path=False)
@@ -40,5 +40,4 @@ class WalletManager:
         hdwallet.from_index(0)
 
         wallet_data = hdwallet.dumps()
-
         return wallet_data

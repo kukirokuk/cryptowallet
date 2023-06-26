@@ -25,6 +25,15 @@ To run the app, use the following steps:
 
 2. Open a web browser and visit http://localhost:8000/admin to access the running app admin page with login: admin and pass: admin. For test purpose only dummy admin user was restored from db backup in process of build. In production environment db backups pushed into repos should be strongly avoided!
 
+## Running tests
+
+To run unit tests, use the following command:
+
+1. After successfully building the Docker image, run:
+
+    ```shell
+     docker run cryptowallet python manage.py test crypto_addresses.tests.tests
+
 ## API docs
 
 ### Create Address

@@ -1,5 +1,7 @@
 FROM python:3.8-slim-bookworm
 
+RUN apt-get update -y && apt install -y libgmp-dev gcc
+
 ENV PYTHONDONTWRITEBYTECODE=1
 
 ENV PYTHONUNBUFFERED=1
