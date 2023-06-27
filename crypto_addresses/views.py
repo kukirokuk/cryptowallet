@@ -23,8 +23,8 @@ class AddressViewSet(ModelViewSet):
 
 
     def generate_wallet_data(self, cryptocurrency):
-        wallet_manager = WalletManager(cryptocurrency=cryptocurrency)
         if cryptocurrency in CRYPTO_CHOICES:
+            wallet_manager = WalletManager(cryptocurrency=cryptocurrency)
             data = wallet_manager.create_wallet()
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
